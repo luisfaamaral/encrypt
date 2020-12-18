@@ -5,22 +5,22 @@ import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class ToNumberEncryptTest {
+public class EncryptWithNumberTest {
 
     @Test
     void toNumber() {
         String msg = "A";
         String result = EncryptBuilder.withMsg(msg)
-                                      .toNumber()
+                                      .withNumber(3)
                                       .build();
-        assertThat(result).isEqualTo("00");
+        assertThat(result).isEqualTo("000");
     }
 
     @Test
     void toNumber_long() {
         String msg = "Ab cd";
         String result = EncryptBuilder.withMsg(msg)
-                                      .toNumber()
+                                      .withNumber(2)
                                       .build();
         assertThat(result).isEqualTo("0001 0203");
     }
@@ -29,7 +29,7 @@ public class ToNumberEncryptTest {
     void toNumber_long2() {
         String msg = "A Z";
         String result = EncryptBuilder.withMsg(msg)
-                                      .toNumber()
+                                      .withNumber(2)
                                       .build();
         assertThat(result).isEqualTo("00 25");
     }

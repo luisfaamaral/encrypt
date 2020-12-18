@@ -1,19 +1,22 @@
 package org.encrypt;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.stream.IntStream;
 
 import org.Config;
 import org.Encrypt;
 
-public class ToOffsetEncrypt implements Encrypt {
+public class EncryptWithOffset implements Encrypt {
 
-    public final Map<String, String> map = new HashMap<>();
+    private final String[] alphabet = new String[130];
+    private final int offset;
 
-    public void initAlphabet(int offset) {
+    public EncryptWithOffset(int offset) {
+        this.offset = offset;
+    }
+
+    public void initAlphabet() {
         IntStream.rangeClosed(Config.START_ALPHABET_LETTER, Config.END_ALPHABET_LETTER)
-                 .forEach(it -> this.map.put(Character.toString(it), transform(it, offset)));
+                 .forEach(it -> alphabet[it] = transform(it, offset));
     }
 
     private String transform(int val, int offset) {
@@ -25,8 +28,8 @@ public class ToOffsetEncrypt implements Encrypt {
     }
 
     @Override
-    public Map<String, String> getMap() {
-        return this.map;
+    public String[] getAlphabet() {
+        return this.alphabet;
     }
 
 }

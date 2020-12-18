@@ -5,13 +5,13 @@ import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class ToOffsetEncryptTest {
+public class EncryptWithOffsetTest {
 
     @Test
     void toOffset_plus1() {
         String msg = "Z";
         String result = EncryptBuilder.withMsg(msg)
-                                      .toOffset(1)
+                                      .withOffset(1)
                                       .build();
         assertThat(result).isEqualTo("A");
     }
@@ -20,7 +20,7 @@ public class ToOffsetEncryptTest {
     void toOffset_minus1() {
         String msg = "A";
         String result = EncryptBuilder.withMsg(msg)
-                                      .toOffset(-1)
+                                      .withOffset(-1)
                                       .build();
         assertThat(result).isEqualTo("Z");
     }
@@ -29,7 +29,7 @@ public class ToOffsetEncryptTest {
     void toOffset_long() {
         String msg = "ABC DEF GHI";
         String result = EncryptBuilder.withMsg(msg)
-                                      .toOffset(2)
+                                      .withOffset(2)
                                       .build();
         assertThat(result).isEqualTo("CDE FGH IJK");
     }
